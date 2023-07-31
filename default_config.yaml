@@ -1,0 +1,38 @@
+PROJECT:
+ - feeder
+
+SEARCH_PATH:
+ - D:\project\VersionPackaging
+
+BOOTLORAD:
+
+
+PARTITION_TABLE:
+
+
+RELEASE:
+ - template.bin
+ - template.hex
+
+DEBUG:
+ - template.axf
+ - template.elf
+ - template.map
+
+OTA:
+
+# subproject 
+---
+SUB1_PROJECT:
+
+SUB1_SEARCH_PATH:
+
+SUB1_BOOTLORAD:
+
+SUB1_PARTITION_TABLE:
+
+SUB1_RELEASE:
+
+SUB1_DEBUG:
+
+SUB1_OTA:
