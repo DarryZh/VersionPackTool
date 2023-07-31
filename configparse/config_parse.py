@@ -8,6 +8,6 @@ def ParseYaml(yaml_file):
     file.close()
     
     data = yaml.load_all(file_data, Loader=yaml.FullLoader)
-    for project in data:
-        print(project)
+    # for project in data:
+    #     print(project)
     return data
