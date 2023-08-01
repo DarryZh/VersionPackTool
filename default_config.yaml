@@ -1,35 +1,56 @@
 PROJECT:
- - feeder
+ - F10
 
 SEARCH_PATH:
- - D:\project\VersionPackaging
+ - D:\output
 
-BOOTLORAD:
+VERSION_HEADER_FILE:
+ - __version__.h
 
+OUTPUT_PATH:
+ - D:\output
+
+BOOTLOADER:
+ - '*.bin'
 
 PARTITION_TABLE:
+ - '*.bin'
 
+KERNEL:
+ - '*.bin'
+
+FS:
+ - '*.bin'
 
 RELEASE:
- - template.bin
- - template.hex
+ - '*.bin'
+ - '*.hex'
 
 DEBUG:
- - template.axf
- - template.elf
- - template.map
+ - '*.axf'
+ - '*.elf'
+ - '*.map'
 
 OTA:
+ - '*.bin'
 
-# subproject 
+# sub project 
 ---
 SUB1_PROJECT:
 
 SUB1_SEARCH_PATH:
 
-SUB1_BOOTLORAD:
+SUB1_VERSION_HEADER_FILE:
+
+SUB1_OUTPUT_PATH:
+
+SUB1_BOOTLOADER:
 
 SUB1_PARTITION_TABLE:
+
+SUB1_KERNEL:
+
+SUB1_FS:
 
 SUB1_RELEASE:
 
