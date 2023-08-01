@@ -32,6 +32,8 @@ if __name__ == '__main__':
 
         if('PROJECT' in cfg.keys()):
             project_name = ParsePro.get_project_name()
+            if(combine_name != ''):
+                combine_name += '_'
             combine_name += ParsePro.get_project_name()
         if('SEARCH_PATH' in cfg.keys()):
             all_path = ParsePro.get_path()
