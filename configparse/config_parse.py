@@ -1,3 +1,4 @@
+import re
 import pyyaml.lib.yaml as yaml
 
 def ParseYaml(yaml_file):
@@ -33,6 +34,11 @@ class ParseProject(object):
             return None
         for ver in self.project[self.prefix+'VERSION_HEADER_FILE']:
             return ver
+    def get_version_re(self) -> list:
+        if((self.project[self.prefix+'VERSION_RE']) == None):
+            return None
+        for ver_re in self.project[self.prefix+'VERSION_RE']:
+            return ver_re
     def get_output_path(self) -> list:
         if((self.project[self.prefix+'OUTPUT_PATH']) == None):
             return None
@@ -66,3 +72,14 @@ class ParseProject(object):
         if((self.project[self.prefix+'OTA']) == None):
             return None
         return self.project[self.prefix+'OTA']
+
+def parse_version_by_re(file_path:str, ver_re) -> str:
+    data = ''
+    with open(file_path, "r") as f: 
+        data = f.read()  
+        f.close()
+
+    ret = re.findall(ver_re, data)
+
+    for data in ret:
+        return data

@@ -7,6 +7,9 @@ SEARCH_PATH:
 VERSION_HEADER_FILE:
  - __version__.h
 
+VERSION_RE:
+ - '\d.\d.\d.\d'
+ 
 OUTPUT_PATH:
  - D:\output
 
