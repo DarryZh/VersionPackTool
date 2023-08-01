@@ -1,6 +1,8 @@
 import os
+import shutil
 import configparse.config_parse as ConfigParse
 import dirhandle.dir_handle as DirHandle
+
 
 CONFIG_YAML_NAME = 'config.yaml'
 
@@ -15,6 +17,7 @@ OTA_PREFIX = 'OTA_'
 combine_name = ''
 all_path = ''
 output_path = ''
+tmp_output_path = ''
 
 if __name__ == '__main__':
     current_path = os.path.abspath(".")
@@ -28,6 +31,11 @@ if __name__ == '__main__':
         project_name_version = ''
         version_header_file_path = ''
         project_version = ''
+
+        tmp_release_output_path = ''
+        tmp_ota_output_path = ''
+        tmp_debug_output_path = ''
+
         ParsePro = ConfigParse.ParseProject(cfg)
 
         if('PROJECT' in cfg.keys()):
@@ -51,29 +59,35 @@ if __name__ == '__main__':
             version_re = ParsePro.get_version_re()
             project_version = ConfigParse.parse_version_by_re(version_header_file_path, version_re)
             combine_name += '_v' + project_version
-            project_name_version = project_name_version
+            project_name_version = project_name + '_v' + project_version
         if('OUTPUT_PATH' in cfg.keys()):
             output_path = ParsePro.get_output_path()
+            tmp_output_path = os.path.join(ParsePro.get_output_path(), 'tmp')
+            tmp_release_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'release', project_name)
+            tmp_ota_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'ota', project_name)
+            tmp_debug_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'debug', project_name)
         if('BOOTLOADER' in cfg.keys()):
             file_name_list = ParsePro.get_bootloader()
-            DirHandle.FindFile_RenameCopy(file_name_list, all_path, output_path, BOOTLOADER_PREFIX+project_name_version)
+            DirHandle.FindFile_RenameCopy(file_name_list, all_path, tmp_release_output_path, BOOTLOADER_PREFIX+project_name_version)
         if('PARTITION_TABLE' in cfg.keys()):
             file_name_list = ParsePro.get_partition_table()
-            DirHandle.FindFile_RenameCopy(file_name_list, all_path, output_path, PARTITION_TABLE_PREFIX+project_name_version)
+            DirHandle.FindFile_RenameCopy(file_name_list, all_path, tmp_release_output_path, PARTITION_TABLE_PREFIX+project_name_version)
         if('KERNEL' in cfg.keys()):
             file_name_list = ParsePro.get_kernel()
-            DirHandle.FindFile_RenameCopy(file_name_list, all_path, output_path, KERNEL_PREFIX+project_name_version)
+            DirHandle.FindFile_RenameCopy(file_name_list, all_path, tmp_release_output_path, KERNEL_PREFIX+project_name_version)
         if('FS' in cfg.keys()):
             file_name_list = ParsePro.get_fs()
-            DirHandle.FindFile_RenameCopy(file_name_list, all_path, output_path, FS_PREFIX+project_name_version)
+            DirHandle.FindFile_RenameCopy(file_name_list, all_path, tmp_release_output_path, FS_PREFIX+project_name_version)
         if('RELEASE' in cfg.keys()):
             file_name_list = ParsePro.get_release()
-            DirHandle.FindFile_RenameCopy(file_name_list, all_path, output_path, RELEASE_PREFIX+project_name_version)
+            DirHandle.FindFile_RenameCopy(file_name_list, all_path, tmp_release_output_path, RELEASE_PREFIX+project_name_version)
         if('DEBUG' in cfg.keys()):
             file_name_list = ParsePro.get_debug()
-            DirHandle.FindFile_RenameCopy(file_name_list, all_path, output_path, DEBUG_PREFIX+project_name_version)
+            DirHandle.FindFile_RenameCopy(file_name_list, all_path, tmp_debug_output_path, DEBUG_PREFIX+project_name_version)
         if('OTA' in cfg.keys()):
             file_name_list = ParsePro.get_ota()
-            DirHandle.FindFile_RenameCopy(file_name_list, all_path, output_path, OTA_PREFIX+project_name_version)
+            DirHandle.FindFile_RenameCopy(file_name_list, all_path, tmp_ota_output_path, OTA_PREFIX+project_name_version)
 
     print('project name : ' + combine_name)
+    DirHandle.generate_zipfile(tmp_output_path, output_path, combine_name)
+    shutil.rmtree(tmp_output_path) 
