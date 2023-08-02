@@ -15,7 +15,6 @@ DEBUG_PREFIX = 'Debug_'
 OTA_PREFIX = 'OTA_'
 
 combine_name = ''
-all_path = ''
 output_path = ''
 tmp_output_path = ''
 
@@ -28,6 +27,7 @@ if __name__ == '__main__':
     print('project cnt is :' + str(project_cnt))
 
     for cfg in config:
+        all_path = ''
         project_name = ''
         project_name_version = ''
         version_header_file_path = ''
@@ -63,16 +63,16 @@ if __name__ == '__main__':
             project_name_version = project_name + '_v' + project_version
         if('OUTPUT_PATH' in cfg.keys()):
             output_path = ParsePro.get_output_path()
-            if output_path != None:
-                tmp_output_path = os.path.join(ParsePro.get_output_path(), 'tmp')
-                if(project_cnt > 1):
-                    tmp_release_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'release', project_name)
-                    tmp_ota_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'ota', project_name)
-                    tmp_debug_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'debug', project_name)
-                else:
-                    tmp_release_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'release')
-                    tmp_ota_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'ota')
-                    tmp_debug_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'debug')
+        if output_path != None:
+            tmp_output_path = os.path.join(output_path, 'tmp')
+            if(project_cnt > 1):
+                tmp_release_output_path = os.path.join(output_path, 'tmp', 'release', project_name)
+                tmp_ota_output_path = os.path.join(output_path, 'tmp', 'ota', project_name)
+                tmp_debug_output_path = os.path.join(output_path, 'tmp', 'debug', project_name)
+            else:
+                tmp_release_output_path = os.path.join(output_path, 'tmp', 'release')
+                tmp_ota_output_path = os.path.join(output_path, 'tmp', 'ota')
+                tmp_debug_output_path = os.path.join(output_path, 'tmp', 'debug')
         # if('BOOTLOADER' in cfg.keys()):
         file_name_list = ParsePro.get_bootloader()
         if file_name_list != None:
