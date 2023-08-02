@@ -24,7 +24,8 @@ if __name__ == '__main__':
     yaml_path = os.path.join(current_path, CONFIG_YAML_NAME)
 
     config = ConfigParse.ParseYaml(yaml_path)
-    print('project cnt is :' + str(len(config)))
+    project_cnt = str(len(config))
+    print('project cnt is :' + project_cnt)
 
     for cfg in config:
         project_name = ''
@@ -63,9 +64,14 @@ if __name__ == '__main__':
         if('OUTPUT_PATH' in cfg.keys()):
             output_path = ParsePro.get_output_path()
             tmp_output_path = os.path.join(ParsePro.get_output_path(), 'tmp')
-            tmp_release_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'release', project_name)
-            tmp_ota_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'ota', project_name)
-            tmp_debug_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'debug', project_name)
+            if(project_cnt > 1):
+                tmp_release_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'release', project_name)
+                tmp_ota_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'ota', project_name)
+                tmp_debug_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'debug', project_name)
+            else:
+                tmp_release_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'release')
+                tmp_ota_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'ota')
+                tmp_debug_output_path = os.path.join(ParsePro.get_output_path(), 'tmp', 'debug')
         if('BOOTLOADER' in cfg.keys()):
             file_name_list = ParsePro.get_bootloader()
             DirHandle.FindFile_RenameCopy(file_name_list, all_path, tmp_release_output_path, BOOTLOADER_PREFIX+project_name_version)
