@@ -1,7 +1,7 @@
 VersionPackaging
 ======
 
-仅依赖原生python（无pip包依赖），跨平台（linux windows），可配置的嵌入式固件打包工具，自动生成http://10.10.82.21:8090/pages/viewpage.action?pageId=4985738所指定规则
+仅依赖原生python（无pip包依赖），跨平台（linux windows），支持子工程，可配置的软件打包工具，自动生成http://10.10.82.21:8090/pages/viewpage.action?pageId=4985738所指定规则
 
 ##环境
 
