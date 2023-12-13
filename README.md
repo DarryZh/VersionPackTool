@@ -7,13 +7,13 @@ VersionPackTool
 
 Python （已验证 3.11.4）
 
-##使用
+## 使用
  - 克隆并 git submodule update --init --recursive
  - 使用default_config.yaml模板，创建用户工程config.yaml
  - 配置config.yaml必要选项，详情见“配置文件说明”
  - 运行 python execute.py
 
-##配置文件说明
+## yaml配置文件说明
 
     PROJECT:        #主工程名
     - F10
