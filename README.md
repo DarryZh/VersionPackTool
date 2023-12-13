@@ -3,7 +3,7 @@ VersionPackTool
 
 仅依赖原生python（无pip包依赖），跨平台（linux windows），支持子工程，可配置的软件打包工具，自动生成所指定规则
 
-##环境
+## 环境
 
 Python （已验证 3.11.4）
 
